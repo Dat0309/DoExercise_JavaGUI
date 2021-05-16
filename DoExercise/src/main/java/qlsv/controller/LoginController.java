@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import qlsv.dao.UserDao;
 import qlsv.entity.User;
 import qlsv.view.LoginView;
+import qlsv.view.StudentView;
 
 /**
  *
@@ -18,6 +19,7 @@ import qlsv.view.LoginView;
 public class LoginController {
     private UserDao userdao;
     private LoginView loginview;
+    private StudentView studentview;
 
     public LoginController(LoginView view) {
         this.loginview = view;
@@ -36,13 +38,13 @@ public class LoginController {
             User user = loginview.getUser();
             if (userdao.checkUser(user)) {
                 // nếu đăng nhập thành công, mở màn hình quản lý sinh viên
-                //studentView = new StudentView();
-                //StudentController studentController = new StudentController(studentView);
-                //studentController.showStudentView();
-                loginview.showMessage("Đăng nhập thành công");
+                studentview = new StudentView();
+                StudentController studentController = new StudentController(studentview);
+                studentController.ShowStudentView();
                 loginview.setVisible(false);
             } else {
                 loginview.showMessage("username hoặc password không đúng.");
+                
             }
         }
     }

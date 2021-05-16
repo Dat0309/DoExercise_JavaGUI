@@ -112,10 +112,10 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         
         panel.add(btnAdd);
         panel.add(btnEdit);
-        panel.add(btnClear);
         panel.add(btnDelete);
-        panel.add(btnSortName);
+        panel.add(btnClear);
         panel.add(btnSortDTB);
+        panel.add(btnSortName);
         
         panel.add(lbID);
         panel.add(lbName);
@@ -126,47 +126,49 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         panel.add(idField);
         panel.add(nameField);
         panel.add(ageField);
-        panel.add(addressArea);
+        panel.add(scrollPaneADDress);
         panel.add(dtbField);
         
         //Cài đặt vị trí xuất hiện trên màn hình login
         layout.putConstraint(SpringLayout.WEST, lbID, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, lbID, 10, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, lbName, 10, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, lbName, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, lbName, 40, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, lbAge, 10, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.WEST,lbAge, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, lbAge, 70, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, lbAddress, 10, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, lbAddress, 100, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, lbDTB, 10, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.WEST, lbDTB, 150, SpringLayout.NORTH, panel);
-        
+        layout.putConstraint(SpringLayout.NORTH, lbDTB, 200, SpringLayout.NORTH, panel);
+         
         layout.putConstraint(SpringLayout.WEST, idField, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, idField, 100, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, idField, 10, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, nameField, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, nameField, 100, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, nameField, 40, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, ageField, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, ageField, 100, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, addressArea, 200, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, addressArea, 200, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.NORTH, ageField, 70, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, scrollPaneADDress, 100, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, scrollPaneADDress, 100, SpringLayout.NORTH, panel);
         layout.putConstraint(SpringLayout.WEST, dtbField, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, dtbField, 100, SpringLayout.NORTH, panel);
-        
+        layout.putConstraint(SpringLayout.NORTH, dtbField, 200, SpringLayout.NORTH, panel);
+         
         layout.putConstraint(SpringLayout.WEST, scrollPaneStudentTable, 300, SpringLayout.WEST, panel);
         layout.putConstraint(SpringLayout.NORTH, scrollPaneStudentTable, 10, SpringLayout.NORTH, panel);
-        
-        layout.putConstraint(SpringLayout.WEST, btnAdd, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, lbID, 10, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, btnEdit, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, btnEdit, 10, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, btnClear, 10, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, btnDelete, 100, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, btnDelete, 10, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, btnClear, 10, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, btnSortName, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, btnSortName, 10, SpringLayout.NORTH, panel);
-        layout.putConstraint(SpringLayout.WEST, btnSortDTB, 100, SpringLayout.WEST, panel);
-        layout.putConstraint(SpringLayout.NORTH, btnSortDTB, 10, SpringLayout.NORTH, panel);
+         
+        layout.putConstraint(SpringLayout.WEST, btnAdd, 20, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, btnAdd, 240, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, btnEdit, 60, SpringLayout.WEST, btnAdd);
+        layout.putConstraint(SpringLayout.NORTH, btnEdit, 240, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, btnDelete, 60, SpringLayout.WEST, btnEdit);
+         
+        layout.putConstraint(SpringLayout.NORTH, btnClear, 240, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, btnClear, 80, SpringLayout.WEST, btnDelete);
+         
+        layout.putConstraint(SpringLayout.NORTH, btnDelete, 240, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, btnSortDTB, 300, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, btnSortDTB, 330, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, btnSortName, 115, SpringLayout.WEST, btnSortDTB);
+        layout.putConstraint(SpringLayout.NORTH, btnSortName, 330, SpringLayout.NORTH, panel);
         
         add(panel);
         pack();
@@ -248,14 +250,117 @@ public class StudentView extends JFrame implements ActionListener, ListSelection
         btnDelete.setEnabled(true);
         btnAdd.setEnabled(false);
     }
+    
+    public Studen getStudentInfo(){
+        if(!validateName() || !validateAge()||!validateAddress()||validateGPA()){
+            return null;
+        }
+        try {
+            Studen student=new Studen();
+            if(idField.getText() != null && !"".equals(idField.getText())){
+                student.setId(Integer.parseInt(idField.getText().trim()));
+            }
+            student.setName(nameField.getText().trim());
+            student.setAge(Byte.parseByte(ageField.getText().trim()));
+            student.setAddress(addressArea.getText().trim());
+            student.setDtb(Float.parseFloat(dtbField.getText().trim()));
+            return student;
+            
+        } catch (Exception e) {
+            showMessage(e.getMessage());
+        }
+        return null;
+    }
+    
+    private boolean validateName(){
+        String name=nameField.getText();
+        if(name==null||"".equals(name.trim())){
+            nameField.requestFocus();
+            showMessage("Name khoong duoc trong.");
+            return  false;
+        }
+        return true;
+    }
+    
+    private boolean validateAddress(){
+        String address= addressArea.getText();
+        if(address==null || "".equals(address.trim())){
+            addressArea.requestFocus();
+            showMessage("Address khong duoc bo trong.");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean validateAge(){
+        try{
+            Byte age = Byte.parseByte(ageField.getText().trim());
+            if(age<0|| age >100){
+                ageField.requestFocus();
+                showMessage("Age khong hop le");
+                return false;
+            }
+        }
+        catch(Exception e){
+        ageField.requestFocus();
+            showMessage("Age khong hop le");
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean validateGPA(){
+    
+        try {
+            Float gpa = Float.parseFloat(dtbField.getText().trim());
+            if(gpa<0||gpa>10){
+                dtbField.requestFocus();
+                showMessage("DTB khong hop le!");
+                return false;
+            }
+        } catch (Exception e) {
+            dtbField.requestFocus();
+            showMessage("DTB khong hop le.");
+            return false;
+        }
+        return true;
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
     
+    public void addADDStudentListener(ActionListener lis){
+        btnAdd.addActionListener(lis);
+    }
+    
+    public void addExitStudentListener(ActionListener lis){
+        btnEdit.addActionListener(lis);
+    }
+    
+    public void addDeleteStudentListener(ActionListener lis){
+        btnDelete.addActionListener(lis);
+    }
+    
+    public void addClearStudentListener(ActionListener lis){
+        btnClear.addActionListener(lis);
+    }
+    
+    public void addSortStudentDTBListener(ActionListener lis){
+        btnSortDTB.addActionListener(lis);
+    }
+    
+    public void addSortStudentNameListener(ActionListener lis){
+        btnSortName.addActionListener(lis);
+    }
+    
+    public void addListStudentSelectionListener(ListSelectionListener lis){
+        studentTable.getSelectionModel().addListSelectionListener(lis);
+    }
 }
